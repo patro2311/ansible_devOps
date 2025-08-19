@@ -1,0 +1,14 @@
+---
+
+
+- hosts: all
+  become: true
+  tasks: 
+  
+  - name: Ansible Jinja2 for statemnet 
+    debug: 
+      msg: >
+           --== Ninja2 for Statement ==--
+           {% for entry in ansible_interfaces -%}
+               Interface entry {{ loop.index }} = {{ entry }}
+           {% endfor  %}

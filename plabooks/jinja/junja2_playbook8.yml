@@ -1,0 +1,26 @@
+--- 
+
+
+- hosts: all
+  become: true
+  tasks: 
+ 
+  - name: Filters
+    debug: 
+      msg: >
+           ------ANSIBLE_JINJA2 FILTER --------
+
+           ---=== min [1, 2, 3, 4, 5] ==---
+
+           {{ [1, 2, 3, 4, 5] | min }}
+
+           ---=== max [1, 2, 3, 4, 5] ==---
+
+           {{ [1, 2, 3, 4, 5] | max }}
+
+           ---=== unique [1, 2, 3, 4, 4, 5, 6, 5] ==---
+
+           {{ [1, 2, 3, 4, 4, 5, 6, 5] | unique }}
+
+           ---=== urlsplit hostname ==--
+           {{ "https://docs.ansible.com/ansible/latest/search.html?q=filters&check_keywords=yes&area=default" | urlsplit('hostname') }}

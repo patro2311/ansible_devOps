@@ -1,0 +1,33 @@
+---
+
+- hosts: 192.168.0.33
+  become: true
+  tasks:
+  
+  - name: install NGINX
+    tags: nginx
+    package: 
+      name: nginx
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: Start NGINX server
+    tags: nginx
+    service: 
+      name: nginx
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"
+    notify: check httpd service
+
+  - templates:
+      src: idex.html-base.j2
+      dest: "{{ nginx_root_location }}/index.html"
+      mode: 0644
+
+
+  handlers: 
+    - name: check httpd service
+      uri:
+        url: http://{{ ansible_default_ipv4.address }}
+        status_code: 200

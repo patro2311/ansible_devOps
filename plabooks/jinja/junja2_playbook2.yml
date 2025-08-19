@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+    - name: Ansible Junja2 if elif 
+      debug:
+        msg: >
+             --= Ansible Junja2 if elif statement ==--
+             {% if ansible_hostname == "AnsibleHOST" -%}
+                    THIS IS THE MASTER_ANSIBLE
+             {% elif ansible_hostname ==  "debian-host" -%}
+                    THIS IS THE DEBIAN_SERVER
+             {% endif %}

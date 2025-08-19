@@ -1,0 +1,6 @@
+---
+
+- name: Check if mariadb is running 
+  mysql_ping:
+    login_user: root
+    login_password: cokolada

@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+  
+    - name: Ansible Junja2 if
+      debug:
+        msg: >
+             --== Ansible Junja2 if Statemenet ==--
+             {# If the hostname is AnsibleHOST, include a message -#}
+             {% if ansible_hostname == "AnsibleHOST" -%}
+                  This is AnsibleHOST
+             {% endif %}
+
+

@@ -1,0 +1,13 @@
+all:
+  children:
+    entosservers:
+      children:
+         centos_server:
+           hosts:
+             192.168.0.33
+    debian_server:
+      children:
+         server:
+           hosts:
+             192.168.0.55 
+         

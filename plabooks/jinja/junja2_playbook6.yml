@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+   
+  - name: Jinja2 for statement "bash"
+    debug:
+      msg: >
+           ----== Jinja2 loop like a bash ==----
+           {% for entry in range(1, 11) -%}
+              {{ entry }}
+           {% endfor %} 

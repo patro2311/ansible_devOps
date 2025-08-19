@@ -1,0 +1,16 @@
+---
+
+- name: Install zabbix packages
+  tags: zabbix installation 
+  dnf:
+    name: "rpm -Uvh https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm"
+    state: present 
+    update_cache: yes
+  when: ansible_ditribution == "CentOS"
+
+- name: Install nececery packages
+  package: 
+    name: "{{ item }}"
+    state: latest
+  when: ansible_distribution == "CentOS"
+  loop: "{{ zabbix_packages }}" 

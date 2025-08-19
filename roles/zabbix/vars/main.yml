@@ -1,0 +1,8 @@
+zabbix_packages: 
+  - zabbix-server-mysql 
+  - zabbix-web-mysql 
+  - zabbix-apache-conf
+  - zabbix-sql-scripts
+  - zabbix-selinux-policy
+  - zabbix-agent
+  - mariadb 

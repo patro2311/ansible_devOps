@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+  
+    - name: Ansible Jinja2 if elif else statement
+      debug: 
+        msg: >
+             ---== Ansible Jinja2 if elif else statement ==--
+             {% if ansible_hostname == "AnsibleHOST" -%}
+                  THIS IS A MASTER_SERVER
+             {% elif ansible_hostname == "debian_host" -%}
+                   THIS IS A DEBIAN_SERVER
+             {% else -%}
+                   This is a old server "{{ ansible_hostname }}"
+             {% endif %}
