@@ -1,7 +1,7 @@
----
 
 - name: Install Zabbix repository for CentOS
   tags: zabbix
+  when: ansible_distribution == "CentOS"
   dnf_repository:
     name: zabbix
     description: Zabbix Official Repository
@@ -9,11 +9,10 @@
     gpgcheck: yes
     gpgkey: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
     enabled: yes
-  when: ansible_distribution == "CentOS"
   
 - name: Install nececery packages
   tags: zabbix
-  package: 
+  dnf: 
     name: "{{ item }}"
     state: latest
     update_only: yes
