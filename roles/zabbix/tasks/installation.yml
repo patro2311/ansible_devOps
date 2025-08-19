@@ -1,13 +1,13 @@
 ---
--  name: Add Zabbix repository for CentOS 9
-   ansible.builtin.dnf_repository:
+- name: Add Zabbix repository for CentOS 9
+  ansible.builtin.dnf_repository:
     name: zabbix
     description: Zabbix Official Repository
     baseurl: https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/
     gpgcheck: yes
     gpgkey: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
     enabled: yes
-   when: ansible_distribution == "CentOS"
+  when: ansible_distribution == "CentOS"
   
 - name: Install nececery packages
   tags: zabbix
