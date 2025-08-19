@@ -7,7 +7,7 @@
 
 - name: restart zabbix necessary services 
   ansible.builtin.systemd:
-    name: {{ item }}
+    name: "{{ item }}"
     state: restarted
   when: ansible_facts.services['zabbix-server']state == 'running'
   loop: 
