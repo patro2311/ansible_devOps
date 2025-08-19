@@ -1,7 +1,8 @@
 ---
-  - hosts: localhost
-    become: true
-    gather_facts: true
-    roles:
-      - zabbix
+
+- hosts: localhost 
+  become: true
+  gather_facts: true 
+  roles:
+    - zabbix
     
