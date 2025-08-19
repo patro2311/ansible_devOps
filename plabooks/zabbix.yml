@@ -1,0 +1,8 @@
+---
+
+-  hosts: localhost
+   connect: local
+   become: true
+   roles:
+     - zabbix
+     
