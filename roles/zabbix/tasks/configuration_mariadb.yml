@@ -1,4 +1,11 @@
 # This task ensures that the httpd, MariaDB, zabbix-serverservice is running before proceeding with configuration.
+- name: Start mariadb service 
+  tags: mariadb
+  ansible.builtin.service:
+    name: mariadb
+    state: started
+    enabled: true
+  when: ansible_distribution == "CentOS"
 
 - name: Create a new DB name zabbix
   tags: mariadb zabbix
