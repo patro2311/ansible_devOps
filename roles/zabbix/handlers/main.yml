@@ -4,3 +4,14 @@
   mysql_ping:
     login_user: root
     login_password: cokolada
+
+- name: restart zabbix necessary services 
+  ansible.builtin.systemd:
+    name: {{ item}}
+    state: restarted
+  when: ansible_facts.services['zabbix-server']state == 'running'
+  loop: 
+    - zabbix-server
+    - zabbix-agent
+    - httpd
+    - php-fpm 

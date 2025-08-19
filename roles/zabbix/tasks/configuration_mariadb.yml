@@ -8,23 +8,29 @@
   when: ansible_distribution == "CentOS"
  
 - name: Create a new DB name zabbix
+  tags: mariadb zabbix
   community.mysql.mysql_db:
     name: zabbix
     state: present 
     encoding: utf8mb4
     collation: utf8mb4_bin
     login_unix_socket: /run/mysqld/mysqld.sock
-
+  when: ansible_distribution == "CentOS"
+  
 - name: Create User zabbix@localhost
+  tags: mariadb zabbix
   community.mysql.mysql_user:
     name: zabbix
     password: cokolada
     priv: "zabbix.*:ALL"
     host: localhost
     state: present 
+  when: ansible_distribution == "CentOS"
 
 - name: Import zabbix schema
+  tags: mariadb zabbix
   ansible.builtin.shell: | 
     zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
   args:
     creates: /var/lib/mysql/zabbix/tables_created.flag 
+  when: ansible_distribution == "CentOS"

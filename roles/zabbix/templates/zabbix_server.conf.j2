@@ -1,0 +1,102 @@
+### Option: LogFile
+# Location of the Zabbix server log file.
+LogFile=/var/log/zabbix/zabbix_server.log
+
+### Option: LogFileSize
+# Max size of log before rotation (0 disables rotation).
+#LogFileSize=0
+
+### Option: PidFile
+#PidFile=/run/zabbix/zabbix_server.pid
+
+### Option: DBHost
+# Database host (use localhost or socket for local DB).
+#DBHost=localhost
+
+### Option: DBName
+DBName={{ zabbix_dbname }}
+
+### Option: DBUser
+DBUser={{ zabbix_user }}
+
+### Option: DBPassword
+DBPassword={{ password_zabbix_db }}
+
+### Option: DBSocket
+# Only if using socket connection (MariaDB/MySQL).
+#DBSocket=/var/lib/mysql/mysql.sock
+
+### Option: SNMPTrapperFile
+#SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
+
+### Option: Timeout
+# Time in seconds for processing checks (default: 3).
+Timeout=4
+
+### Option: LogSlowQueries
+# Log queries slower than X ms (good for tuning).
+LogSlowQueries=3000
+
+### Performance tuning parameters:
+
+### Option: StartPollers
+# Number of pre-forked instances for passive checks.
+#StartPollers=10
+
+### Option: StartPollersUnreachable
+# Number of pollers for unreachable hosts.
+#StartPollersUnreachable=5
+
+### Option: StartTrappers
+# Number of trapper processes for active checks and API.
+#StartTrappers=5
+
+### Option: StartPingers
+# Needed for ICMP checks (availability monitoring).
+#StartPingers=5
+
+### Option: StartDiscoverers
+# Network discovery processes.
+#StartDiscoverers=2
+
+### Option: CacheSize
+# Shared memory size for configuration cache.
+#CacheSize=256M
+
+### Option: HistoryCacheSize
+#HistoryCacheSize=128M
+
+### Option: HistoryIndexCacheSize
+#HistoryIndexCacheSize=64M
+
+### Option: TrendCacheSize
+#TrendCacheSize=64M
+
+### Option: ValueCacheSize
+#ValueCacheSize=128M
+
+### Option: HousekeepingFrequency
+# Housekeeping in hours (clean old data).
+#HousekeepingFrequency=1
+
+### Option: StartDBSyncers
+# Number of processes for writing history/trends to DB.
+#StartDBSyncers=4
+
+### Option: AlertScriptsPath
+AlertScriptsPath=/usr/lib/zabbix/alertscripts
+
+### Option: ExternalScripts
+ExternalScripts=/usr/lib/zabbix/externalscripts
+
+### Option: FpingLocation
+FpingLocation=/usr/sbin/fping
+
+
+### Option: LogType
+# File (default), system, console.
+LogType=file
+
+### Option: AllowRoot
+# For security: never run as root.
+AllowRoot=0
