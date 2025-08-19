@@ -1,7 +1,7 @@
 ---
 
 - name: Add Zabbix repository for CentOS 9
-  ansible.builtin.dnf_repository:
+  dnf_repository:
     name: zabbix
     description: Zabbix Official Repository
     baseurl: https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/
