@@ -32,7 +32,7 @@
   ansible.builtin.shell: | 
     zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix zabbix
   args:
-    column_case_sensitive: true
+    
     creates: /var/lib/mysql/zabbix/tables_created.flag 
   when: ansible_distribution == "CentOS"
   notify: Restart mariadb serivce
