@@ -28,6 +28,6 @@
   when: ansible_distribution == "CentOS"
 
 - name: Import Zabbix SQL
-  shell: zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix
+  shell: zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix zabbix
   environment:
     MYSQL_PWD: "cokolada"
