@@ -3,9 +3,9 @@
 # This file includes tasks for installing Zabbix, configuring MariaDB, and setting up Zabbix.
 
 
-- name: Include zabbix installation tasks
-  include_tasks: installation.yml
-  tags: zabbix 
+#- name: Include zabbix installation tasks
+# include_tasks: installation.yml
+#  tags: zabbix 
 
 - name: include mariadb configuration tasks
   include_tasks: configuration_mariadb.yml
