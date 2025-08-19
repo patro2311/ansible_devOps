@@ -1,6 +1,7 @@
 ---
 
-- name: Add Zabbix repository for CentOS 9
+- name: Install Zabbix repository for CentOS
+  tags: zabbix
   dnf_repository:
     name: zabbix
     description: Zabbix Official Repository
