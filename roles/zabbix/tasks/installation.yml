@@ -7,7 +7,7 @@
     state: present 
     async: 600
     poll: 30
-  when: ansible_ditribution == "CentOS"
+  when: ansible_distribution == "CentOS"
 
 - name: Install nececery packages
   package: 
