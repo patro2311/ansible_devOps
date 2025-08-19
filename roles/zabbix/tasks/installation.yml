@@ -1,18 +1,13 @@
-- name: Install Zabbix repository for CentOS
-  tags: zabbix
-  dnf:
-    name: zabbix
-    description: Zabbix Official Repository
-    baseurl: https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/
-    gpgcheck: yes
-    gpgkey: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
-    enabled: yes
-  when: ansible_distribution == "CentOS"
+- name: Install zabbix rpm from a remote repo
+  ansible.builtin.dnf:
+    name: 'https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm'
+    state: present
+
 - name: Install nececery packages
   tags: zabbix
   dnf: 
     name: "{{ item }}"
     state: latest
-    update_only: yes
+    update_cache: yes
   when: ansible_distribution == "CentOS"
   loop: "{{ zabbix_packages }}" 
