@@ -1,10 +1,9 @@
 ---
 
 - name: Check if mariadb is running 
-  ansible.builtin.systemmd:
+  services:
     name: mariadb
     state: started
-
     
 
 - name: restart zabbix necessary services 
