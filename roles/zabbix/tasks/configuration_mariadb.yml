@@ -16,7 +16,6 @@
     name: zabbix
     password: cokolada
     priv: "zabbix.*:ALL"
-    host: localhost
     state: present 
   when: ansible_distribution == "CentOS"
 
@@ -28,4 +27,3 @@
     creates: /var/lib/mysql/zabbix/tables_created.flag 
   when: ansible_distribution == "CentOS"
 
-  

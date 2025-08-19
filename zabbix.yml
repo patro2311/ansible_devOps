@@ -8,9 +8,9 @@
 
   tasks:
     - name: Ensure Httpd service is running
-  service: 
-     name: "{{ item }}"
-     state: started 
-     enabled: true
-  when: ansible_distribution == "CentOS"
-  loop:  "{{ startup_sevices }}"
+      service: 
+        name: "{{ item }}"
+        state: started 
+        enabled: true
+      when: ansible_distribution == "CentOS"
+      loop:  "{{ startup_sevices }}"
