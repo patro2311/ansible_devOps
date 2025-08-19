@@ -6,16 +6,12 @@
     name: "rpm -Uvh https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm"
     state: present 
   when: ansible_distribution == "CentOS"
-  async: yes
-  poll: 30
   
-
 - name: Install nececery packages
+  tags: zabbix
   package: 
     name: "{{ item }}"
     state: latest
     update_cache: yes
-    async: 600
-    poll: 30
   when: ansible_distribution == "CentOS"
   loop: "{{ zabbix_packages }}" 
