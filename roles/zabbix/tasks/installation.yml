@@ -1,4 +1,5 @@
 ---
+
 - name: Add Zabbix repository for CentOS 9
   ansible.builtin.dnf_repository:
     name: zabbix
