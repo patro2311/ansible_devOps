@@ -1,7 +1,7 @@
 ---
 
 - name: Check if mariadb is running 
-  services:
+  service:
     name: mariadb
     state: started
     
