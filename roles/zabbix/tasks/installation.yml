@@ -15,6 +15,6 @@
   package: 
     name: "{{ item }}"
     state: latest
-    update_cache: yes
+    update_only: yes
   when: ansible_distribution == "CentOS"
   loop: "{{ zabbix_packages }}" 
