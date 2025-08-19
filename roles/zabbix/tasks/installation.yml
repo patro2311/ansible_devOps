@@ -2,7 +2,7 @@
   ansible.builtin.dnf:
     name: 'https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm'
     state: present
-    validate_certs: false
+    validate_certs: true
 
 
 - name: Install nececery packages
