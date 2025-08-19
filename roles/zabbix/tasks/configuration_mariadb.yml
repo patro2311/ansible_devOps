@@ -22,7 +22,7 @@
   community.mysql.mysql_user:
     login_unix_socket: /var/lib/mysql/mysql.sock
     name: zabbix
-    password: cokolada
+    password: zabbix
     priv: "zabbix.*:ALL"
     state: present 
   when: ansible_distribution == "CentOS"
