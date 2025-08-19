@@ -1,14 +1,10 @@
-- name: Import Zabbix GPG key
-  rpm_key:
-    state: present
-    key: https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
 
 - name: Install zabbix rpm from a remote repo
   ansible.builtin.dnf:
     name: 'https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm'
     state: present
     validate_certs: true
-
+    disable_gpg_check: true
 
 - name: Install nececery packages
   tags: zabbix
