@@ -5,9 +5,10 @@
   dnf:
     name: "rpm -Uvh https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm"
     state: present 
-    async: yes
-    poll: 30
   when: ansible_distribution == "CentOS"
+  async: yes
+  poll: 30e
+  
 
 - name: Install nececery packages
   package: 
