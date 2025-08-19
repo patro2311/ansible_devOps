@@ -10,6 +10,8 @@
 - name: Create a new DB name zabbix
   tags: mariadb zabbix
   community.mysql.mysql_db:
+    login_user: root
+    login_password: cokolada
     name: zabbix
     state: present 
     encoding: utf8mb4
@@ -19,6 +21,8 @@
 - name: Create User zabbix@localhost
   tags: mariadb zabbix
   community.mysql.mysql_user:
+    login_user: root
+    login_password: cokolada
     name: zabbix
     password: cokolada
     priv: "zabbix.*:ALL"
