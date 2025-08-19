@@ -16,3 +16,9 @@
     - zabbix-agent
     - httpd
     - php-fpm 
+
+
+- name: check if httpd is running 
+  uri:
+    url: http://{{ ansible_default_ipv4.address }}/zabbix
+    status_code: 200

@@ -1,4 +1,12 @@
 ---
+# This task ensures that the httpd service is running before proceeding with configuration.
+- name: Ensure Httpd service is running
+  service: 
+     name: httpd
+     state: started 
+  when: ansible_distribution == "CentOS"
+  notify:  check if httpd is running
+
 # This task ensures that the MariaDB service is running before proceeding with database configuration.
 - name: start MariaDB
   tags: mariadb zabbix 
