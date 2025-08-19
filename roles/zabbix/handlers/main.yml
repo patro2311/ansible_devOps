@@ -1,9 +1,9 @@
 ---
 
-- name: Check if mariadb is running 
+- name: Restart mariadb serivce
   service:
     name: mariadb
-    state: started
+    state: restarted
     
 
 - name: restart zabbix necessary services 
