@@ -1,9 +1,11 @@
 ---
 
 - name: Check if mariadb is running 
-  mysql_ping:
-    login_user: root
-    login_password: cokolada
+  ansible.builtin.systemmd:
+    name: mariadb
+    state: started
+
+    
 
 - name: restart zabbix necessary services 
   ansible.builtin.systemd:
