@@ -1,20 +1,13 @@
----
-# This task ensures that the httpd service is running before proceeding with configuration.
+# This task ensures that the httpd, MariaDB, zabbix-serverservice is running before proceeding with configuration.
 - name: Ensure Httpd service is running
   service: 
-     name: httpd
+     name: "{{ item }}"
      state: started 
+     enabled: true
   when: ansible_distribution == "CentOS"
-  notify:  check if httpd is running
+  loop:  "{{ startup_sevices }}"
+  
 
-# This task ensures that the MariaDB service is running before proceeding with database configuration.
-- name: start MariaDB
-  tags: mariadb zabbix 
-  service: 
-    name: mariadb
-    state: started
-  when: ansible_distribution == "CentOS"
-  notify: Check if mariadb is running 
 
 - name: Create a new DB name zabbix
   tags: mariadb zabbix

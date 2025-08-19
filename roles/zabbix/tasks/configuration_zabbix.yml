@@ -1,5 +1,3 @@
----
-
 - name: Upload template for Zabbix server configuration
   ansible.builtin.template:
     tags: zabbix
