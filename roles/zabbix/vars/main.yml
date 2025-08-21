@@ -13,6 +13,8 @@ zabbix_packages:
 startup_sevices:
     - httpd
     - mariadb
+
+zabbix_services: 
     - zabbix-server
     - zabbix-agent
     - php-fpm

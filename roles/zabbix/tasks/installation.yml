@@ -18,7 +18,7 @@
   when: ansible_distribution == "CentOS"
   loop: "{{ zabbix_packages }}" 
 
-- name: Enable and start MariaDB, zabbix server and nececery services
+- name: Enable and start MariaDB, httpd services
   tags: zabbix
   ansible.builtin.systemd:
     name: "{{ item }}"

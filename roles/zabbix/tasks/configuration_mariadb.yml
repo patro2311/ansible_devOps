@@ -37,3 +37,16 @@
     MYSQL_PWD: "zabbix"
 # Run this task only if the schema check failed
   when: zabbix_schema_check.rc != 0 
+
+- name: Upload template for Zabbix server configuration
+  tags: zabbix
+  ansible.builtin.template:
+    src: zabbix_server_conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: zabbix 
+    group: zabbix
+    mode: '0644'
+  notify: restart zabbix necessary services 
+
+
+
