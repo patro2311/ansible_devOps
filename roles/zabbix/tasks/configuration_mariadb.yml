@@ -51,7 +51,7 @@
     state: import
     default_character_set: utf8mb4
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
-  when: abbix_schema_check.rc != 0
+  when: zabbix_schema_check.rc != 0
 
 
 #- name: Import Zabbix SQL
@@ -71,7 +71,7 @@
     owner: zabbix 
     group: zabbix
     mode: '0644'
-  notify: estart zabbix necessary services 
+  notify: restart zabbix necessary services 
 
 
 
