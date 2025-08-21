@@ -40,7 +40,11 @@
     state: import
     default_character_set: utf8mb4
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
+<<<<<<< HEAD
   when: zabbix_schema_check.rc != 0 
+=======
+  when: zabbix_schema_check.rc != 0
+>>>>>>> 39ddb775c0b3f4fe301943bde1de6de031cd0393
 
 
 - name: Upload template for Zabbix server configuration
