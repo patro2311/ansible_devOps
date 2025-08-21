@@ -29,7 +29,7 @@
 
 - name: Ensure that zabbix schema exit
   tags: mariadb zabbix
-  commnad:
+  command:
     cmd: mysql -uzabbix -pzabbix zabbix -e "show tables;"
   changed_when: false 
   register: zabbix_schema_check
