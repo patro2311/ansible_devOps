@@ -1,7 +1,10 @@
 - name: Upload template for Zabbix server configuration
+  ags: zabbix
   ansible.builtin.template:
-    tags: zabbix
     src: zabbix_server_conf.j2
     dest: /etc/zabbix/zabbix_server.conf
+    owner: zabbix 
+    group: zabbix
+    mode: '0644'
   notify: restart zabbix necessary services 
 
