@@ -7,16 +7,16 @@
     
 
 - name: restart zabbix necessary services 
+  tags: zabbix
   ansible.builtin.systemd:
     name: "{{ item }}"
     state: restarted
-  when: ansible_facts.services['zabbix-server']state == 'running'
   loop: 
     - zabbix-server
     - zabbix-agent
     - httpd
-    - php-fpm 
-
+    - php-fpm
+  when: ansible_facts['os_family'] == 'RedHat'
 
 - name: check if httpd is running 
   uri:
