@@ -31,7 +31,7 @@
 
 - name: Import Zabbix SQL
   tags: mariadb zabbix
-  shell: "zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix
+  shell: "zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix {{ password_zabbix_user }}"
   environment:
     MYSQL_PWD: "zabbix"
 # Run this task only if the schema check failed
