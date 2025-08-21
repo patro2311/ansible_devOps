@@ -29,14 +29,26 @@
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"
 
-- name: Import Zabbix SQL
+
+- name: Import Zabbix SQL schema
   tags: mariadb zabbix
-  zabbix_dbname: zabbix
-  shell: "zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -u{{ zabbix_user }} {{ zabbix_dbname }}"
-  environment:
-    MYSQL_PWD: "{{ password_zabbix_user }}"
+  ansible.builtin.mysql_db:
+    login_unix_socket: "{{ login_unix_socket }}"
+    name: "{{ zabbix_dbname }}"
+    state: import
+    default_character_set: utf8mb4
+    target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
+  when: ansible_distribution == "CentOS" + zabbix_schema_check.rc != 0
+
+
+#- name: Import Zabbix SQL
+#  tags: mariadb zabbix
+#  zabbix_dbname: zabbix
+#  shell: "zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -u{{ zabbix_user }} {{ zabbix_dbname }}"
+#  environment:
+#    MYSQL_PWD: "{{ password_zabbix_user }}"
 # Run this task only if the schema check failed
-  when: zabbix_schema_check.rc != 0 
+# when: zabbix_schema_check.rc != 0 
 
 - name: Upload template for Zabbix server configuration
   tags: zabbix
