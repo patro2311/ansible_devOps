@@ -4,7 +4,7 @@
 - name: Create a new DB name zabbix
   tags: mariadb zabbix
   community.mysql.mysql_db:
-    login_unix_socket: "{{ login_unix_socket }}"
+# login_unix_socket: "{{ login_unix_socket }}"
     name: zabbix
     state: present 
     encoding: utf8mb4
@@ -14,7 +14,7 @@
 - name: Create User zabbix@localhost
   tags: mariadb zabbix
   community.mysql.mysql_user:
-    login_unix_socket: "{{ login_unix_socket }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock
     name: zabbix
     password: zabbix
     priv: "zabbix.*:ALL"
