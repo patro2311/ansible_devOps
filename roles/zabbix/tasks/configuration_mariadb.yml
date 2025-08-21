@@ -5,7 +5,7 @@
   tags: mariadb zabbix
   community.mysql.mysql_db:
     login_unix_socket: "{{ login_unix_socket }}"
-    name: zabbix
+    name: "{{ zabbix_dbname }}"
     state: present 
     encoding: utf8mb4
     collation: utf8mb4_bin
@@ -24,7 +24,7 @@
 - name: Ensure that zabbix schema exit
   tags: mariadb zabbix
   command:
-    cmd: mysql -uzabbix -pzabbix zabbix -e "show tables;"
+    cmd: mysql -u{{ zabbix_user }} -p{{ password_zabbix_user }}" zabbix -e "show tables;"
   changed_when: false 
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"

@@ -11,7 +11,7 @@
   
 - name: Install nececery packages
   tags: zabbix
-  dnf: 
+  ansible.builtin.dnf: 
     name: "{{ item }}"
     state: latest
     update_cache: yes
