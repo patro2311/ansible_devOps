@@ -23,7 +23,6 @@
   register: mariadb_service_status
   when: ansible_distribution == "CentOS"
 
-
 - name: Check if httpd server is running 
   uri:
     url: http://{{ ansible_default_ipv4.address }}/zabbix
