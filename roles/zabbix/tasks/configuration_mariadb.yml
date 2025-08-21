@@ -29,10 +29,11 @@
     login_password: "{{ password_zabbix_user }}"
     login_db: zabbix
     query: "SHOW TABLES;"
-  register: zabbix_schema_check
   failed_when: false
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"
+
+  
 #- name: Ensure that zabbix schema exit
 #  tags: mariadb zabbix
 #  command:
