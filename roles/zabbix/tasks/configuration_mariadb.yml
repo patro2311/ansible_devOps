@@ -21,13 +21,25 @@
     state: present 
   when: ansible_distribution == "CentOS"
 
-- name: Ensure that zabbix schema exit
+- name: Ensure that zabbix schema exist
   tags: mariadb zabbix
-  command:
-    cmd: mysql -u{{ zabbix_user }} -p{{ password_zabbix_user }}" zabbix -e "show tables;"
-  changed_when: false 
+  ansible.builtinn.mysql_query:
+    login_unix_socket: "{{ login_unix_socket }}"
+    login_user: "{{ zabbix_user }}"
+    login_password: "{{ password_zabbix_user }}"
+    login_db: zabbix
+    query: "SHOW TABLES;"
+  register: zabbix_schema_check
+  failed_when: false
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"
+#- name: Ensure that zabbix schema exit
+#  tags: mariadb zabbix
+#  command:
+#    cmd: mysql -u{{ zabbix_user }} -p{{ password_zabbix_user }}" zabbix -e "show tables;"
+#  changed_when: false 
+#  register: zabbix_schema_check
+#  when: ansible_distribution == "CentOS"
 
 
 - name: Import Zabbix SQL schema
@@ -38,7 +50,7 @@
     state: import
     default_character_set: utf8mb4
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
-  when: ansible_distribution == "CentOS" + zabbix_schema_check.rc != 0
+  when: abbix_schema_check.rc != 0
 
 
 #- name: Import Zabbix SQL
