@@ -33,7 +33,7 @@
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"
 
-  
+
 #- name: Ensure that zabbix schema exit
 #  tags: mariadb zabbix
 #  command:
@@ -45,7 +45,7 @@
 
 - name: Import Zabbix SQL schema
   tags: mariadb zabbix
-  ansible.builtin.mysql_db:
+  community.mysql.mysql_query:
     login_unix_socket: "{{ login_unix_socket }}"
     name: "{{ zabbix_dbname }}"
     state: import
