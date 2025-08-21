@@ -10,10 +10,6 @@
   include_tasks: configuration_mariadb.yml
   tags: mariadb zabbix
 
-- name: include zabbix configuration tasks
-  include_tasks: configuration_zabbix.yml
-  tags: zabbix 
-
 - name: Check if mariadb service is running
   tags: mariadb
   ansible.builtin.service:
