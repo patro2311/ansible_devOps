@@ -12,11 +12,11 @@
 
 - name: Start nececery zabbix services
   tags: zabbix
-  services:
+  service:
     - name: "{{ item }}"
       state: started
       enabled: true
-  loop: "{{ zabbix_services }}"
+  loop: "{{ zabbix_necessary_services}}"
   when: ansible_distribution == "CentOS" 
 
 - name: Check if mariadb service is running

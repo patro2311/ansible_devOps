@@ -14,7 +14,7 @@ startup_sevices:
     - httpd
     - mariadb
 
-zabbix_services: 
+zabbix_necessary_services: 
     - zabbix-server
     - zabbix-agent
     - php-fpm
