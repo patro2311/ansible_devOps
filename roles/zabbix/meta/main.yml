@@ -1,8 +1,8 @@
-dependencies:
-  - role: 
+- dependencies:
+    - role: 
       - firewalld
 
-galaxy_info:
+  galaxy_info:
   role_name: zabbix
   author: Patrik Bilý
   description: Ansible role to install and configure Zabbix server
