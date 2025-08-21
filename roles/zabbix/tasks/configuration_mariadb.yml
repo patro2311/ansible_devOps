@@ -15,8 +15,8 @@
   tags: mariadb zabbix
   community.mysql.mysql_user:
     login_unix_socket: /var/lib/mysql/mysql.sock
-    name: zabbix
-    password: zabbix
+    name: "{{ zabbix_user }}"
+    password: "{{ password_zabbix_user }}"
     priv: "zabbix.*:ALL"
     state: present 
   when: ansible_distribution == "CentOS"
