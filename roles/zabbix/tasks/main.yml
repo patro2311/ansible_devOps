@@ -2,6 +2,18 @@
 # tasks file for zabbix role
 # This file includes tasks for installing Zabbix, configuring MariaDB, and setting up Zabbix.
 
+- name: Include zabbix installation tasks
+  include_tasks: installation.yml
+  tags: zabbix 
+
+- name: include mariadb configuration tasks
+  include_tasks: configuration_mariadb.yml
+  tags: mariadb zabbix
+
+- name: include zabbix configuration tasks
+  include_tasks: configuration_zabbix.yml
+  tags: zabbix 
+
 - name: Check if mariadb service is running
   tags: mariadb
   ansible.builtin.service:
@@ -19,16 +31,3 @@
     status_code: 200
   register: httpd_check
   when: ansible_facts['os_family'] == 'RedHat'
-
-
-- name: Include zabbix installation tasks
-  include_tasks: installation.yml
-  tags: zabbix 
-
-- name: include mariadb configuration tasks
-  include_tasks: configuration_mariadb.yml
-  tags: mariadb zabbix
-
-- name: include zabbix configuration tasks
-  include_tasks: configuration_zabbix.yml
-  tags: zabbix 
