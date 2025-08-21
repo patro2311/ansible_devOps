@@ -3,4 +3,5 @@
     service: http
     permanent: true
     state: enabled
+  notify: restart firewalld
   when: ansible_facts['os_family'] == 'RedHat'
