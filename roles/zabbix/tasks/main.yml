@@ -10,7 +10,7 @@
   include_tasks: configuration_mariadb.yml
   tags: mariadb zabbix
 
-  - name: Start nececery zabbix services
+- name: Start nececery zabbix services
   tags: zabbix
   services: 
     - name: "{{ item }}"
