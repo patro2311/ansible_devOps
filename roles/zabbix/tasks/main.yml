@@ -13,9 +13,9 @@
 - name: Start nececery zabbix services
   tags: zabbix
   service:
-    - name: "{{ item }}"
-      state: started
-      enabled: true
+    name: "{{ item }}"
+    state: started
+    enabled: true
   loop: "{{ zabbix_necessary_services}}"
   when: ansible_distribution == "CentOS" 
 
