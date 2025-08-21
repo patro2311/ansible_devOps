@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    
+    {
+      "type": "ansible",
+      "request": "launch",
+      "name": "Run Ansible Playbook",
+      "playbook": "${workspaceFolder}/${input:/Users/patrikbily/ansible_devOps/plabooks/zabbix.ymlaybookPath}"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "/Users/patrikbily/ansible_devOps/plabooks/zabbix.ymlokPath",
+      "description": "Select the Ansible playbook to run",
+      "options": [
+        "zabbix.yml",
+        "plabooks/install_ngnix.yml",
+        "plabooks/zabbix.yml",
+        "plabooks/jinja/junja2_playbook.yml",
+        "plabooks/jinja/junja2_playbook2.yml",
+        "plabooks/jinja/junja2_playbook3.yml",
+        "plabooks/jinja/junja2_playbook4.yml",
+        "plabooks/jinja/junja2_playbook5.yml",
+        "plabooks/jinja/junja2_playbook6.yml",
+        "plabooks/jinja/junja2_playbook7.yml",
+        "plabooks/jinja/junja2_playbook8.yml"
+      ]
+    }
+  ]
+}
