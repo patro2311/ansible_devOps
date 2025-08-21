@@ -1,12 +1,14 @@
 ---
 
 - name: Install zabbix rpm from a remote repo
+  tags: zabbix
   ansible.builtin.dnf:
     name: 'https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm'
     state: present
     validate_certs: true
     disable_gpg_check: true
-
+  when: ansible_facts['os_family]== 'RedHat'
+  
 - name: Install nececery packages
   tags: zabbix
   dnf: 

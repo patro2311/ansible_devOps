@@ -1,0 +1,6 @@
+- name: Enable http/https access to Zabbix 
+  ansible.builtin.firewalld:
+    service: zabbix
+    permanent: true
+    state: enabled
+  when: ansible_facts['os_family'] == 'RedHat'

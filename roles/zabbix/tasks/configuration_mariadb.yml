@@ -4,7 +4,7 @@
 - name: Create a new DB name zabbix
   tags: mariadb zabbix
   community.mysql.mysql_db:
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ login_unix_socket }}"
     name: zabbix
     state: present 
     encoding: utf8mb4
@@ -14,7 +14,7 @@
 - name: Create User zabbix@localhost
   tags: mariadb zabbix
   community.mysql.mysql_user:
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ login_unix_socket }}"
     name: zabbix
     password: zabbix
     priv: "zabbix.*:ALL"
@@ -32,7 +32,7 @@
 
 - name: Import Zabbix SQL
   tags: mariadb zabbix
-  shell: zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix 
+  shell: "{{ zabbix_schema }}"
   environment:
     MYSQL_PWD: "zabbix"
 # Run this task only if the schema check failed

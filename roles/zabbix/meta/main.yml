@@ -1,0 +1,33 @@
+dependencies:
+  - role: 
+      - firewalld
+      - zabbix 
+
+galaxy_info:
+  role_name: zabbix
+  author: Patrik Bilý
+  description: Ansible role to install and configure Zabbix server
+  company: P.B. s.r.o.
+  license: MIT
+
+  min_ansible_version: 2.12
+
+  platforms:
+# EL meants CentOS
+    - name: EL
+      versions:
+        - 8
+        - 9
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+
+  galaxy_tags:
+    - zabbix
+    - mariadb 
+

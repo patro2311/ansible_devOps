@@ -1,0 +1,2 @@
+zabbix_schema: zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix
+login_unix_socket: /var/lib/mysql/mysql.sock
