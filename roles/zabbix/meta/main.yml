@@ -1,7 +1,6 @@
 dependencies:
   - role: 
       - firewalld
-      - zabbix 
 
 galaxy_info:
   role_name: zabbix
