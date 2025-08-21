@@ -29,9 +29,34 @@
     login_password: "{{ password_zabbix_user }}"
     login_db: zabbix
     query: "SHOW TABLES;"
-  failed_when: false
   register: zabbix_schema_check
-  when: ansible_distribution == "CentOS"
+
+
+- name: Import Zabbix SQL schema
+  tags: mariadb zabbix
+  community.mysql.mysql_query:
+    login_unix_socket: "{{ login_unix_socket }}"
+    name: "{{ zabbix_dbname }}"
+    state: import
+    default_character_set: utf8mb4
+    target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
+  when: zabbix_schema_check.rc != 0 
+
+
+- name: Upload template for Zabbix server configuration
+  tags: zabbix
+  ansible.builtin.template:
+    src: zabbix_server_conf.j2
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: zabbix 
+    group: zabbix
+    mode: '0644'
+  notify: restart zabbix necessary services 
+
+
+
+
+
 
 
 #- name: Ensure that zabbix schema exit
@@ -43,17 +68,6 @@
 #  when: ansible_distribution == "CentOS"
 
 
-- name: Import Zabbix SQL schema
-  tags: mariadb zabbix
-  community.mysql.mysql_query:
-    login_unix_socket: "{{ login_unix_socket }}"
-    name: "{{ zabbix_dbname }}"
-    state: import
-    default_character_set: utf8mb4
-    target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
-  when: abbix_schema_check.rc != 0
-
-
 #- name: Import Zabbix SQL
 #  tags: mariadb zabbix
 #  zabbix_dbname: zabbix
@@ -62,19 +76,3 @@
 #    MYSQL_PWD: "{{ password_zabbix_user }}"
 # Run this task only if the schema check failed
 # when: zabbix_schema_check.rc != 0 
-
-- name: Upload template for Zabbix server configuration
-  tags: zabbix
-  ansible.builtin.template:
-    src: zabbix_server_conf.j2
-    dest: /etc/zabbix/zabbix_server.conf
-    owner: zabbix 
-    group: zabbix
-    mode: '0644'
-  notify: estart zabbix necessary services 
-
-
-
-
-
-
