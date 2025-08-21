@@ -1,5 +1,5 @@
 - name: Upload template for Zabbix server configuration
-  ags: zabbix
+  tags: zabbix
   ansible.builtin.template:
     src: zabbix_server_conf.j2
     dest: /etc/zabbix/zabbix_server.conf
