@@ -10,6 +10,15 @@
   include_tasks: configuration_mariadb.yml
   tags: mariadb zabbix
 
+  - name: Start nececery zabbix services
+  tags: zabbix
+  services: 
+    - name: "{{ item }}"
+      state: started
+      enabled: true
+  loop: "{{ zabbix_services }}"
+  when: ansible_distribution == "CentOS" 
+
 - name: Check if mariadb service is running
   tags: mariadb
   ansible.builtin.service:
@@ -25,3 +34,4 @@
     status_code: 200
   register: httpd_check
   when: ansible_facts['os_family'] == 'RedHat'
+

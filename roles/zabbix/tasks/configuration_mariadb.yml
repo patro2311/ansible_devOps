@@ -29,10 +29,9 @@
   register: zabbix_schema_check
   when: ansible_distribution == "CentOS"
 
-
 - name: Import Zabbix SQL
   tags: mariadb zabbix
-  shell: "{{ zabbix_schema }}"
+  shell: "zcat /usr/share/zabbix/sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix zabbix
   environment:
     MYSQL_PWD: "zabbix"
 # Run this task only if the schema check failed
@@ -46,7 +45,10 @@
     owner: zabbix 
     group: zabbix
     mode: '0644'
-  notify: restart zabbix necessary services 
+  notify: estart zabbix necessary services 
+
+
+
 
 
 
