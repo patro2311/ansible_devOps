@@ -20,7 +20,6 @@
     name: mariadb
     state: started
     enabled: true
-    fail_when: false
   register: mariadb_service_status
   when: ansible_distribution == "CentOS"
 
