@@ -19,7 +19,7 @@
   tags: mariadb zabbix
   community.mysql.mysql_variables:
     variable: log_bin_trust_function_creators
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ login_unix_socket }}"
     value: 1
     login_user: root
     login_password: "{{ root_password_mariadb }}"
@@ -28,7 +28,7 @@
 - name: Create user zabbix@localhost
   tags: mariadb zabbix
   community.mysql.mysql_user:
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ login_unix_socket }}"
     name: "{{ zabbix_user }}"
     password: "{{ password_zabbix_user }}"
     priv: "{{zabbix_dbname}}.*:ALL"
@@ -45,6 +45,9 @@
     query: "SHOW TABLES;"
   register: zabbix_schema_check
 
+# zabbix_schema_check.query_result[0].c | int == 0 This ensures that the schema is imported only
+# if there are no tables in the database. 
+
 - name: Import Zabbix SQL schema
   community.mysql.mysql_db:
     login_unix_socket: /var/lib/mysql/mysql.sock
@@ -53,7 +56,7 @@
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz
     login_user: "{{ zabbix_user }}"
     login_password: "{{ password_zabbix_user }}"
-  when: zabbix_schema_check.failed
+  when: zabbix_schema_check.query_result[0].c | int == 0
 
 - name: Upload template for Zabbix server configuration
   tags: zabbix
