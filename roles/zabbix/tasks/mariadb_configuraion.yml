@@ -42,7 +42,7 @@
     login_user: "{{ zabbix_user }}"
     login_password: "{{ password_zabbix_user }}"
     login_db: "{{ zabbix_dbname }}"
-    query: SELECT COUNT(*) AS table_count FROM information_schema.tables WHERE table_schema='{{ zabbix_dbname }}';"
+    query: "SELECT COUNT(*) AS table_count FROM information_schema.tables WHERE table_schema='{{ zabbix_dbname }}';"
   register: zabbix_schema_check
 
 # zabbix_schema_check.query_result[0].c | int == 0 This ensures that the schema is imported only
