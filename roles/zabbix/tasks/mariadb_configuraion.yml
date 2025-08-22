@@ -3,6 +3,9 @@
 
 - name: Create a new DB name zabbix
   tags: mariadb zabbix
+  collections: 
+    - community.mysql
+
   community.mysql.mysql_db:
     login_unix_socket: "{{ login_unix_socket }}"
     name: "{{ zabbix_dbname }}"
@@ -10,8 +13,18 @@
     encoding: utf8mb4
     collation: utf8mb4_bin
   when: ansible_distribution == "CentOS"
+
+- name: Set log_bin_trust_function_creators to 1 for zabbix database
+  tags: mariadb zabbix
+  community.mysql.mysql_variables:
+    variable: log_bin_trust_function_creators
+    login_unix_socket: /var/lib/mysql/mysql.sock
+    value: 1
+    login_user: root
+    login_password: "{{ root_password_mariadb }}"
+  when: ansible_distribution == "CentOS"
   
-- name: Create User zabbix@localhost
+- name: Create user zabbix@localhost
   tags: mariadb zabbix
   community.mysql.mysql_user:
     login_unix_socket: /var/lib/mysql/mysql.sock
@@ -30,17 +43,15 @@
     login_db: zabbix
     query: "SHOW TABLES;"
 
-
-
 - name: Import Zabbix SQL schema
-  tags: mariadb zabbix
-  community.mysql.mysql_query:
-    login_unix_socket: "{{ login_unix_socket }}"
+  community.mysql.mysql_db:
     name: "{{ zabbix_dbname }}"
     state: import
-    default_character_set: utf8mb4
-    target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz 
- 
+    target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz
+    login_user: "{{ zabbix_user }}"
+    login_password: "{{ password_zabbix_user }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock
+  when: zabbix_schema_check.rc != 0
 
 - name: Upload template for Zabbix server configuration
   tags: zabbix
@@ -52,12 +63,9 @@
     mode: '0644'
   notify: restart zabbix necessary services 
 
-
-
-
-
-
-
+# ***************************************************************************
+# ALTERNATIVE WAY TO IMPORT ZABBIX SQL SCHEMA
+# *************************************************************************** 
 #- name: Ensure that zabbix schema exit
 #  tags: mariadb zabbix
 #  command:

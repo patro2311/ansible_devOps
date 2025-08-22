@@ -2,12 +2,21 @@
 # tasks file for zabbix role
 # This file includes tasks for installing Zabbix, configuring MariaDB, and setting up Zabbix.
 
-#- name: Include zabbix installation tasks
-#  include_tasks: installation.yml
-#  tags: zabbix 
+- name: Include package_installation 
+  include_tasks: package_installation.yml
+  tags: zabbix 
+
+- name: Enable and start MariaDB, httpd services
+  tags: zabbix
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  when: ansible_distribution == "CentOS"
+  loop: "{{ startup_sevices }}"
 
 - name: include mariadb configuration tasks
-  include_tasks: configuration_mariadb.yml
+  include_tasks: mariadb_configuraion.yml
   tags: mariadb zabbix
 
 - name: Start nececery zabbix services
@@ -18,15 +27,6 @@
     enabled: true
   loop: "{{ zabbix_necessary_services}}"
   when: ansible_distribution == "CentOS" 
-
-- name: Check if mariadb service is running
-  tags: mariadb
-  ansible.builtin.systemd:
-    name: mariadb
-    state: started
-    enabled: true
-  register: mariadb_service_status
-  when: ansible_distribution == "CentOS"
 
 - name: Check if httpd server is running 
   uri:

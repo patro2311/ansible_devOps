@@ -21,5 +21,6 @@ zabbix_necessary_services:
 
 password_zabbix_db: cokolada
 password_zabbix_user: cokolada
+root_password_mariadb: cokolada
 zabbix_user: zabbix 
 zabbix_dbname: zabbix

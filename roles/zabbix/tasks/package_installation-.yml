@@ -1,6 +1,6 @@
 ---
 
-- name: Install zabbix rpm from a remote repo
+- name: Add zabbix rpm from a remote repo
   tags: zabbix
   ansible.builtin.dnf:
     name: 'https://repo.zabbix.com/zabbix/7.4/release/centos/9/noarch/zabbix-release-latest-7.4.el9.noarch.rpm'
@@ -9,7 +9,7 @@
     disable_gpg_check: true
   when: ansible_facts['os_family']== "RedHat"
   
-- name: Install nececery packages
+- name: Install Zabbix server, frontend, agent and database packages
   tags: zabbix
   ansible.builtin.dnf: 
     name: "{{ item }}"
@@ -17,12 +17,3 @@
     update_cache: yes
   when: ansible_distribution == "CentOS"
   loop: "{{ zabbix_packages }}" 
-
-- name: Enable and start MariaDB, httpd services
-  tags: zabbix
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  when: ansible_distribution == "CentOS"
-  loop: "{{ startup_sevices }}"
