@@ -46,12 +46,12 @@
 
 - name: Import Zabbix SQL schema
   community.mysql.mysql_db:
+    login_unix_socket: /var/lib/mysql/mysql.sock
     name: "{{ zabbix_dbname }}"
     state: import
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz
     login_user: "{{ zabbix_user }}"
     login_password: "{{ password_zabbix_user }}"
-    login_unix_socket: /var/lib/mysql/mysql.sock
   when: zabbix_schema_check.rc != 0
 
 - name: Upload template for Zabbix server configuration
