@@ -31,7 +31,7 @@
     login_unix_socket: /var/lib/mysql/mysql.sock
     name: "{{ zabbix_user }}"
     password: "{{ password_zabbix_user }}"
-    priv: "zabbix.*:ALL"
+    priv: "{{zabbix_dbname}}.*:ALL"
     state: present 
   when: ansible_distribution == "CentOS"
 
@@ -41,7 +41,7 @@
     login_unix_socket: "{{ login_unix_socket }}"
     login_user: "{{ zabbix_user }}"
     login_password: "{{ password_zabbix_user }}"
-    login_db: zabbix
+    login_db: "{{ zabbix_dbname }}"
     query: "SHOW TABLES;"
   register: zabbix_schema_check
 
