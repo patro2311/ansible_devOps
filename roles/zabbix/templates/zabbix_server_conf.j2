@@ -11,7 +11,7 @@ LogFile=/var/log/zabbix/zabbix_server.log
 
 ### Option: DBHost
 # Database host (use localhost or socket for local DB).
-#DBHost=localhost
+# DBHost=localhost
 
 ### Option: DBName
 DBName={{ zabbix_dbname }}
@@ -87,10 +87,10 @@ LogSlowQueries=3000
 AlertScriptsPath=/usr/lib/zabbix/alertscripts
 
 ### Option: ExternalScripts
-ExternalScripts=/usr/lib/zabbix/externalscripts
+# ExternalScripts=/usr/lib/zabbix/externalscripts
 
 ### Option: FpingLocation
-FpingLocation=/usr/sbin/fping
+# FpingLocation=/usr/sbin/fping
 
 
 ### Option: LogType
@@ -99,4 +99,4 @@ LogType=file
 
 ### Option: AllowRoot
 # For security: never run as root.
-AllowRoot=0
+# AllowRoot=0
