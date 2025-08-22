@@ -52,7 +52,7 @@
     target: /usr/share/zabbix/sql-scripts/mysql/server.sql.gz
     login_user: "{{ zabbix_user }}"
     login_password: "{{ password_zabbix_user }}"
-  when: zabbix_schema_check.rc != 0
+  when: zabbix_schema_check.failed
 
 - name: Upload template for Zabbix server configuration
   tags: zabbix
